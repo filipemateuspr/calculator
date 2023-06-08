@@ -1,19 +1,17 @@
-package unused.view;
+package calculadora;
 
-public class Functions {
+public class Functions{
 	
-	private boolean haValores = false, estaSomando = false, estaSubtraindo = false, 
-			        estaMultiplicando = false, estaDividindo = false, novoCalculo = false;
+	private boolean haValores = false, novoCalculo = false, estaCalculando = false;
+	private int tipoCalculo = 0;
 	
 	//Construtores
 	public Functions() {}
-	public Functions(boolean haValores, boolean estaSomando, boolean estaSubtraindo, boolean estaMultiplicando, boolean estaDividindo, boolean novoCalculo) {
+	public Functions(boolean haValores, boolean novoCalculo, boolean estaCalculando, int tipoCalculo) {
 		this.haValores = haValores;
-		this.estaSomando = estaSomando;
-		this.estaSubtraindo = estaSubtraindo;
-		this.estaMultiplicando = estaMultiplicando;
-		this.estaDividindo = estaDividindo;
 		this.novoCalculo = novoCalculo;
+		this.estaCalculando = estaCalculando;
+		this.tipoCalculo = tipoCalculo;
 	}
 	
 	//Getters e setters
@@ -23,35 +21,23 @@ public class Functions {
 	public void setHaValores(boolean haValores) {
 		this.haValores = haValores;
 	}
-	public boolean estaSomando() {
-		return estaSomando;
-	}
-	public void setEstaSomando(boolean estaSomando) {
-		this.estaSomando = estaSomando;
-	}
-	public boolean estaSubtraindo() {
-		return estaSubtraindo;
-	}
-	public void setEstaSubtraindo(boolean estaSubtraindo) {
-		this.estaSubtraindo = estaSubtraindo;
-	}
-	public boolean estaMultiplicando() {
-		return estaMultiplicando;
-	}
-	public void setEstaMultiplicando(boolean estaMultiplicando) {
-		this.estaMultiplicando = estaMultiplicando;
-	}
-	public boolean estaDividindo() {
-		return estaDividindo;
-	}
-	public void setEstaDividindo(boolean estaDividindo) {
-		this.estaDividindo = estaDividindo;
-	}
 	public boolean isNovoCalculo() {
 		return novoCalculo;
 	}
 	public void setNovoCalculo(boolean novoCalculo) {
 		this.novoCalculo = novoCalculo;
+	}
+	public boolean estaCalculando() {
+		return estaCalculando;
+	}
+	public void setEstaCalculando(boolean estaCalculando) {
+		this.estaCalculando = estaCalculando;
+	}
+	public int getTipoCalculo() {
+		return tipoCalculo;
+	}
+	public void setTipoCalculo(int tipoCalculo) {
+		this.tipoCalculo = tipoCalculo;
 	}
 	
 	//Métodos (funções)
@@ -73,28 +59,47 @@ public class Functions {
 		double valorCampo01, valorCampo02;
 		String resultado = null;
 		switch(tipo) {
-		case 1:
+		case 107:
 			valorCampo01 = Double.parseDouble(valor1);
 			valorCampo02 = Double.parseDouble(valor2);
 			resultado = String.valueOf(valorCampo01 + valorCampo02);
 			break;
-		case 2:
+		case 106:
 			valorCampo01 = Double.parseDouble(valor1);
 			valorCampo02 = Double.parseDouble(valor2);
 			resultado = String.valueOf(valorCampo01 * valorCampo02);
 			break;
-		case 3:
+		case 111:
 			valorCampo02 = Double.parseDouble(valor1);
 			valorCampo01 = Double.parseDouble(valor2);
 			resultado = String.valueOf(valorCampo01 / valorCampo02);
 			break;
-		case 4:
+		case 109:
 			valorCampo02 = Double.parseDouble(valor1);
 			valorCampo01 = Double.parseDouble(valor2);
 			resultado = String.valueOf(valorCampo01 - valorCampo02);
 			break;
 		}
-		if(resultado == "Infinity") {resultado = "Valor infinito";}
+		if(resultado == "Infinity" || resultado == "NaN") {resultado = "Cálculo inválido";}
 		return converterValorPonto(resultado);
+	}
+	
+	public String buscarCodigoTecla(int keyID) {
+		String keyCode[] = new String[500];
+		keyCode[48] = "0"; keyCode[96] = "0";
+		keyCode[49] = "1"; keyCode[97] = "1";
+		keyCode[50] = "2"; keyCode[98] = "2";
+		keyCode[51] = "3"; keyCode[99] = "3";
+		keyCode[52] = "4"; keyCode[100] = "4";
+		keyCode[53] = "5"; keyCode[101] = "5";
+		keyCode[54] = "6"; keyCode[102] = "6";
+		keyCode[55] = "7"; keyCode[103] = "7";
+		keyCode[56] = "8"; keyCode[104] = "8";
+		keyCode[57] = "9"; keyCode[105] = "9";
+		keyCode[106] = "X"; keyCode[107] = "+";
+		keyCode[109] = "-"; keyCode[111] = "/";
+		keyCode[110] = ","; keyCode[127] = "Delete";
+		keyCode[8] = "Backspace"; keyCode[10] = "Enter";
+		return keyCode[keyID];
 	}
 }

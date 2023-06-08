@@ -1,4 +1,4 @@
-package unused.view;
+package calculadora;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -10,16 +10,19 @@ public class Main extends JFrame {
 	
 	private static JPanel painelGeral;
 	protected static Component frame;
-	private static JTextField tfNumeroInserido;
-	private static JTextField tfNumeroSomando;
-	private static JTextField tfOperador;
-	private static JTextField tfNumeroResultado;
-	private final JTextField tfRastreioTeclas = new JTextField();
+	private static JTextField tfCalculoNumeroInsercao;
+	private static JTextField tfCalculoNumeroOperacao;
+	private static JTextField tfCalculoExibeOperador;
+	private static JTextField tfCalculoNumeroResultado;
+	private final JTextField tfRastreadorTeclas = new JTextField();
 	private static JTextField tfDicas;
-	public static Functions calc = new Functions();
-	public static String version = "v1.0.6";
+	public static Functions cFunc = new Functions();
+	public static String version = "v1.1.0";
 	
-	//Inicializa a aplicação (gerado automaticamente)
+	/* =================================================
+	 * Inicializa a calculadora (gerado automaticamente)
+	 * =================================================
+	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -33,30 +36,40 @@ public class Main extends JFrame {
 		});
 	}
 	
-	//Funções da calculadora
-	public static void realizarCalculo() {
-		String valorConvertido1 = calc.converterValorVirgula(tfNumeroInserido.getText());
-		String valorConvertido2 = calc.converterValorVirgula(tfNumeroSomando.getText());
+	/* =================================
+	 * Funções principais da calculadora
+	 * =================================
+	 */
+	public static void realizarCalculo(int tipoCalc) {
+		String valorConvertido1 = cFunc.converterValorVirgula(tfCalculoNumeroInsercao.getText());
+		String valorConvertido2 = cFunc.converterValorVirgula(tfCalculoNumeroOperacao.getText());
 		try {
-			if(calc.estaSomando() == true) {
-				tfNumeroResultado.setText(calc.realizarCalculo(1, valorConvertido1, valorConvertido2));
+			switch(tipoCalc) {
+			case 107:
+				tfCalculoNumeroResultado.setText(cFunc.realizarCalculo(tipoCalc, valorConvertido1, valorConvertido2));
 				tfDicas.setText(null);
-				calc.setNovoCalculo(true);
-			} else if(calc.estaMultiplicando() == true) {
-				tfNumeroResultado.setText(calc.realizarCalculo(2, valorConvertido1, valorConvertido2));
+				cFunc.setNovoCalculo(true);
+				break;
+			case 106:
+				tfCalculoNumeroResultado.setText(cFunc.realizarCalculo(tipoCalc, valorConvertido1, valorConvertido2));
 				tfDicas.setText(null);
-				calc.setNovoCalculo(true);
-			} else if(calc.estaDividindo() == true) {
-				tfNumeroResultado.setText(calc.realizarCalculo(3, valorConvertido1, valorConvertido2));
+				cFunc.setNovoCalculo(true);
+				break;
+			case 111:
+				tfCalculoNumeroResultado.setText(cFunc.realizarCalculo(tipoCalc, valorConvertido1, valorConvertido2));
 				tfDicas.setText(null);
-				calc.setNovoCalculo(true);
-			} else if(calc.estaSubtraindo() == true) {
-				tfNumeroResultado.setText(calc.realizarCalculo(4, valorConvertido1, valorConvertido2));
+				cFunc.setNovoCalculo(true);
+				break;
+			case 109:
+				tfCalculoNumeroResultado.setText(cFunc.realizarCalculo(tipoCalc, valorConvertido1, valorConvertido2));
 				tfDicas.setText(null);
-				calc.setNovoCalculo(true);
-			} else {
+				cFunc.setNovoCalculo(true);
+				break;
+			default:
 				tfDicas.setText("Verifique os campos e tente novamente.");
+				break;
 			}
+			cFunc.setEstaCalculando(false);
 		} catch(java.lang.NumberFormatException excecao) {
 			tfDicas.setText("Verifique os campos e tente novamente.");
 		}
@@ -64,67 +77,64 @@ public class Main extends JFrame {
 	
 	//Função que limpa a tela
 	public static void limparVisualizacao() {
-		tfNumeroInserido.setText(null);
-		tfNumeroSomando.setText(null);
-		tfOperador.setText(null);
-		tfNumeroResultado.setText(null);
+		tfCalculoNumeroInsercao.setText(null);
+		tfCalculoNumeroOperacao.setText(null);
+		tfCalculoExibeOperador.setText(null);
+		tfCalculoNumeroResultado.setText(null);
 		tfDicas.setText(null);
-		calc.setHaValores(false);
-		calc.setEstaDividindo(false);
-		calc.setEstaMultiplicando(false);
-		calc.setEstaSomando(false);
-		calc.setEstaSubtraindo(false);
-		calc.setNovoCalculo(false);
+		cFunc.setHaValores(false);
+		cFunc.setNovoCalculo(false);
+		cFunc.setEstaCalculando(false);
 	}
 	
 	//Função que escreve os números na tela
 	public static void escreverTecla(String teclaTipo, String teclaID) {
-		if(teclaTipo.contains("#Num") && teclaTipo != "#Num_virgula") {
-			if(tfNumeroInserido.getText().isBlank()) {
-				tfNumeroInserido.setText(calc.inserirTecla(teclaID));
+		if(teclaTipo.contains("#Key_numero") && teclaTipo != "#Key_virgula") {
+			if(tfCalculoNumeroInsercao.getText().isBlank()) {
+				tfCalculoNumeroInsercao.setText(cFunc.inserirTecla(teclaID));
 			} else {
-				tfNumeroInserido.setText(tfNumeroInserido.getText() + calc.inserirTecla(teclaID)); 
+				tfCalculoNumeroInsercao.setText(tfCalculoNumeroInsercao.getText() + cFunc.inserirTecla(teclaID)); 
 			}
 		} else if(teclaTipo.contains("virgula")){
-			if(tfNumeroInserido.getText().isEmpty()) {
+			if(tfCalculoNumeroInsercao.getText().isEmpty()) {
 				tfDicas.setText("Virgula não pode ser usada no começo da operação.");
-			} else if(tfNumeroInserido.getText().contains(",")) {
+			} else if(tfCalculoNumeroInsercao.getText().contains(",")) {
 				tfDicas.setText("Virgula já está sendo usada nessa operação.");
 			} else {
-				tfNumeroInserido.setText(tfNumeroInserido.getText() + calc.inserirTecla(teclaID)); 
+				tfCalculoNumeroInsercao.setText(tfCalculoNumeroInsercao.getText() + cFunc.inserirTecla(teclaID)); 
 			}
 		}
 	}
 	
 	//Função que define o tipo de calculo com base no operador
 	public static void definirTipoCalculo(String operador) {
-		if(tfNumeroInserido.getText().isEmpty()) {
+		if(tfCalculoNumeroInsercao.getText().isEmpty()) {
 			tfDicas.setText("Não é possível realizar uma conta sem números!");
 		} else {
-			if(tfNumeroSomando.getText().isEmpty()) {
-				tfOperador.setText(operador);
-				tfNumeroSomando.setText(tfNumeroInserido.getText());
+			if(tfCalculoNumeroOperacao.getText().isEmpty()) {
+				tfCalculoExibeOperador.setText(operador);
+				tfCalculoNumeroOperacao.setText(tfCalculoNumeroInsercao.getText());
 				tfDicas.setText(null);
-				tfNumeroInserido.setText(null);
-				calc.setHaValores(true);
+				tfCalculoNumeroInsercao.setText(null);
+				cFunc.setHaValores(true);
 			}
-			if(calc.isNovoCalculo() == true) {
-				tfOperador.setText(operador);
-				tfNumeroSomando.setText(tfNumeroResultado.getText());
+			if(cFunc.isNovoCalculo() == true) {
+				tfCalculoExibeOperador.setText(operador);
+				tfCalculoNumeroOperacao.setText(tfCalculoNumeroResultado.getText());
 				tfDicas.setText(null);
-				tfNumeroInserido.setText(null);
-				tfNumeroResultado.setText(null);
-				calc.setHaValores(true);
-				calc.setEstaDividindo(false);
-				calc.setEstaMultiplicando(false);
-				calc.setEstaSomando(false);
-				calc.setEstaSubtraindo(false);
-				calc.setNovoCalculo(false);
+				tfCalculoNumeroInsercao.setText(null);
+				tfCalculoNumeroResultado.setText(null);
+				cFunc.setHaValores(true);
+				cFunc.setNovoCalculo(false);
 			}
 		}
 	}
 	
-	//Cria o frame, composto por trechos gerado no design da tela
+	/* ===============================================================
+	 * Construi a janela - Composto por trechos gerado automáticamente
+	 * na criação dos componentes.
+	 * ===============================================================
+	 */
 	public Main() {
 		setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		setResizable(false);
@@ -146,7 +156,7 @@ public class Main extends JFrame {
 		lblTitulo.setBounds(0, 0, 484, 55);
 		painelGeral.add(lblTitulo);
 		
-		JLabel lblVersao = new JLabel("Versão: " + version + " (04/06/2023)");
+		JLabel lblVersao = new JLabel("Versão: " + version + " (06/06/2023)");
 		lblVersao.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblVersao.setForeground(Color.WHITE);
 		lblVersao.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
@@ -200,7 +210,7 @@ public class Main extends JFrame {
 		painelGeral.add(btnBotaoTecla0);
 		btnBotaoTecla0.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				escreverTecla("#Num", "0");
+				escreverTecla("#Key_numero", "0");
 			}
 		});
 		
@@ -213,7 +223,7 @@ public class Main extends JFrame {
 		painelGeral.add(btnBotaoTecla01);
 		btnBotaoTecla01.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				escreverTecla("#Num", "1");
+				escreverTecla("#Key_numero", "1");
 			}
 		});
 		
@@ -226,7 +236,7 @@ public class Main extends JFrame {
 		painelGeral.add(btnBotaoTecla02);
 		btnBotaoTecla02.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				escreverTecla("#Num", "2");
+				escreverTecla("#Key_numero", "2");
 			}
 		});
 		
@@ -239,7 +249,7 @@ public class Main extends JFrame {
 		painelGeral.add(btnBotaoTecla03);
 		btnBotaoTecla03.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				escreverTecla("#Num", "3");
+				escreverTecla("#Key_numero", "3");
 			}
 		});
 		
@@ -252,7 +262,7 @@ public class Main extends JFrame {
 		painelGeral.add(btnBotaoTecla04);
 		btnBotaoTecla04.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				escreverTecla("#Num", "4");
+				escreverTecla("#Key_numero", "4");
 			}
 		});
 		
@@ -265,7 +275,7 @@ public class Main extends JFrame {
 		painelGeral.add(btnBotaoTecla05);
 		btnBotaoTecla05.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				escreverTecla("#Num", "5");
+				escreverTecla("#Key_numero", "5");
 			}
 		});
 		
@@ -278,7 +288,7 @@ public class Main extends JFrame {
 		painelGeral.add(btnBotaoTecla06);
 		btnBotaoTecla06.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				escreverTecla("#Num", "6");
+				escreverTecla("#Key_numero", "6");
 			}
 		});
 		
@@ -291,7 +301,7 @@ public class Main extends JFrame {
 		painelGeral.add(btnBotaoTecla07);
 		btnBotaoTecla07.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				escreverTecla("#Num", "7");
+				escreverTecla("#Key_numero", "7");
 			}
 		});
 		
@@ -304,7 +314,7 @@ public class Main extends JFrame {
 		painelGeral.add(btnBotaoTecla08);
 		btnBotaoTecla08.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				escreverTecla("#Num", "8");
+				escreverTecla("#Key_numero", "8");
 			}
 		});
 		
@@ -317,7 +327,7 @@ public class Main extends JFrame {
 		painelGeral.add(btnBotaoTecla09);
 		btnBotaoTecla09.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				escreverTecla("#Num", "9");
+				escreverTecla("#Key_numero", "9");
 			}
 		});
 		
@@ -359,7 +369,7 @@ public class Main extends JFrame {
 		btnBotaoTeclaMais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				definirTipoCalculo("+");
-				calc.setEstaSomando(true);
+				cFunc.setTipoCalculo(107);
 			}
 		});
 		
@@ -373,7 +383,7 @@ public class Main extends JFrame {
 		btnBotaoTeclaVezes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				definirTipoCalculo("X");
-				calc.setEstaMultiplicando(true);
+				cFunc.setTipoCalculo(106);
 			}
 		});
 		
@@ -387,7 +397,7 @@ public class Main extends JFrame {
 		btnBotaoTeclaDivisao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				definirTipoCalculo("/");
-				calc.setEstaDividindo(true);
+				cFunc.setTipoCalculo(111);
 			}
 		});
 		
@@ -401,7 +411,7 @@ public class Main extends JFrame {
 		btnBotaoTeclaMenos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				definirTipoCalculo("-");
-				calc.setEstaSubtraindo(true);
+				cFunc.setTipoCalculo(109);
 			}
 		});
 		
@@ -415,7 +425,7 @@ public class Main extends JFrame {
 		painelGeral.add(btnBotaoTeclaCalcular);
 		btnBotaoTeclaCalcular.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				realizarCalculo();
+				realizarCalculo(cFunc.getTipoCalculo());
 			}
 		});
 		
@@ -433,53 +443,53 @@ public class Main extends JFrame {
 			}
 		});
 		
-		tfNumeroInserido = new JTextField();
-		tfNumeroInserido.setFocusable(false);
-		tfNumeroInserido.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 25));
-		tfNumeroInserido.setHorizontalAlignment(SwingConstants.CENTER);
-		tfNumeroInserido.setEditable(false);
-		tfNumeroInserido.setForeground(Color.WHITE);
-		tfNumeroInserido.setColumns(10);
-		tfNumeroInserido.setCaretColor(new Color(50, 50, 50));
-		tfNumeroInserido.setBackground(new Color(50, 50, 50));
-		tfNumeroInserido.setBounds(34, 101, 413, 88);
-		painelGeral.add(tfNumeroInserido);
+		tfCalculoNumeroInsercao = new JTextField();
+		tfCalculoNumeroInsercao.setFocusable(false);
+		tfCalculoNumeroInsercao.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 25));
+		tfCalculoNumeroInsercao.setHorizontalAlignment(SwingConstants.CENTER);
+		tfCalculoNumeroInsercao.setEditable(false);
+		tfCalculoNumeroInsercao.setForeground(Color.WHITE);
+		tfCalculoNumeroInsercao.setColumns(10);
+		tfCalculoNumeroInsercao.setCaretColor(new Color(50, 50, 50));
+		tfCalculoNumeroInsercao.setBackground(new Color(50, 50, 50));
+		tfCalculoNumeroInsercao.setBounds(34, 101, 413, 88);
+		painelGeral.add(tfCalculoNumeroInsercao);
 		
-		tfNumeroSomando = new JTextField();
-		tfNumeroSomando.setFocusable(false);
-		tfNumeroSomando.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 25));
-		tfNumeroSomando.setHorizontalAlignment(SwingConstants.TRAILING);
-		tfNumeroSomando.setEditable(false);
-		tfNumeroSomando.setForeground(Color.WHITE);
-		tfNumeroSomando.setColumns(10);
-		tfNumeroSomando.setCaretColor(new Color(50, 50, 50));
-		tfNumeroSomando.setBackground(new Color(50, 50, 50));
-		tfNumeroSomando.setBounds(34, 59, 236, 42);
-		painelGeral.add(tfNumeroSomando);
+		tfCalculoNumeroOperacao = new JTextField();
+		tfCalculoNumeroOperacao.setFocusable(false);
+		tfCalculoNumeroOperacao.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 25));
+		tfCalculoNumeroOperacao.setHorizontalAlignment(SwingConstants.TRAILING);
+		tfCalculoNumeroOperacao.setEditable(false);
+		tfCalculoNumeroOperacao.setForeground(Color.WHITE);
+		tfCalculoNumeroOperacao.setColumns(10);
+		tfCalculoNumeroOperacao.setCaretColor(new Color(50, 50, 50));
+		tfCalculoNumeroOperacao.setBackground(new Color(50, 50, 50));
+		tfCalculoNumeroOperacao.setBounds(34, 59, 236, 42);
+		painelGeral.add(tfCalculoNumeroOperacao);
 		
-		tfOperador = new JTextField();
-		tfOperador.setFocusable(false);
-		tfOperador.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 30));
-		tfOperador.setHorizontalAlignment(SwingConstants.CENTER);
-		tfOperador.setEditable(false);
-		tfOperador.setForeground(Color.WHITE);
-		tfOperador.setColumns(10);
-		tfOperador.setCaretColor(new Color(50, 50, 50));
-		tfOperador.setBackground(new Color(50, 50, 50));
-		tfOperador.setBounds(269, 59, 45, 42);
-		painelGeral.add(tfOperador);
+		tfCalculoExibeOperador = new JTextField();
+		tfCalculoExibeOperador.setFocusable(false);
+		tfCalculoExibeOperador.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 30));
+		tfCalculoExibeOperador.setHorizontalAlignment(SwingConstants.CENTER);
+		tfCalculoExibeOperador.setEditable(false);
+		tfCalculoExibeOperador.setForeground(Color.WHITE);
+		tfCalculoExibeOperador.setColumns(10);
+		tfCalculoExibeOperador.setCaretColor(new Color(50, 50, 50));
+		tfCalculoExibeOperador.setBackground(new Color(50, 50, 50));
+		tfCalculoExibeOperador.setBounds(269, 59, 45, 42);
+		painelGeral.add(tfCalculoExibeOperador);
 		
-		tfNumeroResultado = new JTextField();
-		tfNumeroResultado.setFocusable(false);
-		tfNumeroResultado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 25));
-		tfNumeroResultado.setHorizontalAlignment(SwingConstants.CENTER);
-		tfNumeroResultado.setEditable(false);
-		tfNumeroResultado.setForeground(Color.WHITE);
-		tfNumeroResultado.setColumns(10);
-		tfNumeroResultado.setCaretColor(new Color(50, 50, 50));
-		tfNumeroResultado.setBackground(new Color(50, 50, 50));
-		tfNumeroResultado.setBounds(34, 189, 413, 42);
-		painelGeral.add(tfNumeroResultado);
+		tfCalculoNumeroResultado = new JTextField();
+		tfCalculoNumeroResultado.setFocusable(false);
+		tfCalculoNumeroResultado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 25));
+		tfCalculoNumeroResultado.setHorizontalAlignment(SwingConstants.CENTER);
+		tfCalculoNumeroResultado.setEditable(false);
+		tfCalculoNumeroResultado.setForeground(Color.WHITE);
+		tfCalculoNumeroResultado.setColumns(10);
+		tfCalculoNumeroResultado.setCaretColor(new Color(50, 50, 50));
+		tfCalculoNumeroResultado.setBackground(new Color(50, 50, 50));
+		tfCalculoNumeroResultado.setBounds(34, 189, 413, 42);
+		painelGeral.add(tfCalculoNumeroResultado);
 		
 		tfDicas = new JTextField();
 		tfDicas.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 14));
@@ -498,63 +508,31 @@ public class Main extends JFrame {
 		tfDicas.setColumns(10);
 		
 		//Frame usado para rastrear as teclas digitadas pelo usuário
-		tfRastreioTeclas.setEditable(false);
-		tfRastreioTeclas.setBackground(new Color(0, 0, 0));
-		tfRastreioTeclas.setBounds(0, -29, 484, 640);
-		painelGeral.add(tfRastreioTeclas);
-		tfRastreioTeclas.setColumns(10);
-		tfRastreioTeclas.setOpaque(false);
-		
-		tfRastreioTeclas.addKeyListener(new java.awt.event.KeyAdapter() {
+		tfRastreadorTeclas.setEditable(false);
+		tfRastreadorTeclas.setBackground(new Color(0, 0, 0));
+		tfRastreadorTeclas.setBounds(0, -29, 484, 640);
+		painelGeral.add(tfRastreadorTeclas);
+		tfRastreadorTeclas.setColumns(10);
+		tfRastreadorTeclas.setOpaque(false);
+		tfRastreadorTeclas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                   if (evt.getKeyCode() == 96) {
-                	   escreverTecla("#Num_NUMPAD_0", "0");
-                   } else if (evt.getKeyCode() == 97) {
-                	   escreverTecla("#Num_NUMPAD_1", "1");
-                   } else if (evt.getKeyCode() == 98) {
-                	   escreverTecla("#Num_NUMPAD_2", "2");
-                   } else if (evt.getKeyCode() == 99) {
-                	   escreverTecla("#Nume_NUMPAD_3", "3");
-                   } else if (evt.getKeyCode() == 100) {
-                	   escreverTecla("#Num_NUMPAD_4", "4");
-                   } else if (evt.getKeyCode() == 101) {
-                	   escreverTecla("#Num_NUMPAD_5", "5");
-                   } else if (evt.getKeyCode() == 102) {
-                	   escreverTecla("#Num_NUMPAD_6", "6");
-                   } else if (evt.getKeyCode() == 103) {
-                	   escreverTecla("#Num_NUMPAD_7", "7");
-                   } else if (evt.getKeyCode() == 104) {
-                	   escreverTecla("#Num_NUMPAD_8", "8");
-                   } else if (evt.getKeyCode() == 105) {
-                	   escreverTecla("#Num_NUMPAD_9", "9");
-                   } else if(evt.getKeyCode() == 110) {
-                	   escreverTecla("#Num_virgula", ",");
-                   } else if (evt.getKeyCode() == 106) {
-                	   escreverTecla("#Op_NUMPAD_multiplicacao", "X");
-                	   definirTipoCalculo("*");
-                	   calc.setEstaMultiplicando(true);
-                   } else if(evt.getKeyCode() == 107) {
-                	   escreverTecla("#Op_NUMPAD_adicao", "+");
-                	   definirTipoCalculo("+");
-                	   calc.setEstaSomando(true);
-                   } else if(evt.getKeyCode() == 109) {
-                	   escreverTecla("#Op_NUMPAD_subtracao", "-");
-                	   definirTipoCalculo("-");
-                	   calc.setEstaSubtraindo(true);
-                   } else if(evt.getKeyCode() == 111) {
-                	   escreverTecla("#Op_NUMPAD_divisao", "/");
-                	   definirTipoCalculo("/");
-                	   calc.setEstaDividindo(true);
-                   } else if(evt.getKeyCode() == 127) {
-                	   escreverTecla("#Op_KEY_delete", "Delete");
-                	   limparVisualizacao();
-                   } else if(evt.getKeyCode() == 8) {
-                	   escreverTecla("#Op_KEY_backspace", "Backspace");
-                	   limparVisualizacao();
-                   } else if(evt.getKeyCode() == 10) {
-                	   escreverTecla("#Op_KEY_genericEnter", "Enter");
-                	   realizarCalculo();
-                   }
+            	if(evt.getKeyCode() == 106 || evt.getKeyCode() == 107 || evt.getKeyCode() == 109 || evt.getKeyCode() == 111) {
+            		if(cFunc.estaCalculando() == false) {
+                		cFunc.setTipoCalculo(evt.getKeyCode());
+                		definirTipoCalculo(cFunc.buscarCodigoTecla(evt.getKeyCode()));
+                		cFunc.setEstaCalculando(true);
+            		} else {
+            			tfDicas.setText("Uma operação já está sendo realizada!");
+            		}
+            	} else if(evt.getKeyCode() == 110) {
+            		escreverTecla("#Key_virgula", ",");
+            	} else if(evt.getKeyCode() == 127 || evt.getKeyCode() == 8) {
+            		limparVisualizacao();
+            	} else if(evt.getKeyCode() == 10) {
+            		realizarCalculo(cFunc.getTipoCalculo());
+            	} else {
+            		escreverTecla("#Key_numero", cFunc.buscarCodigoTecla(evt.getKeyCode()));
+            	}
             }
         });
 	}
