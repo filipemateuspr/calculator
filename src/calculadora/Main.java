@@ -17,7 +17,7 @@ public class Main extends JFrame {
 	private final JTextField tfRastreadorTeclas = new JTextField();
 	private static JTextField tfDicas;
 	public static Functions cFunc = new Functions();
-	public static String version = "v1.1.0";
+	public static String version = "v1.1.1";
 	
 	/* =================================================
 	 * Inicializa a calculadora (gerado automaticamente)
@@ -153,10 +153,10 @@ public class Main extends JFrame {
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setForeground(new Color(255, 255, 255));
 		lblTitulo.setFont(new Font("Dialog", Font.BOLD, 20));
-		lblTitulo.setBounds(0, 0, 484, 55);
+		lblTitulo.setBounds(0, 0, 484, 53);
 		painelGeral.add(lblTitulo);
 		
-		JLabel lblVersao = new JLabel("Versão: " + version + " (06/06/2023)");
+		JLabel lblVersao = new JLabel("Versão: " + version + " (08/06/2023)");
 		lblVersao.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblVersao.setForeground(Color.WHITE);
 		lblVersao.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
@@ -171,12 +171,13 @@ public class Main extends JFrame {
 		painelGeral.add(lblCredito);
 		
 		JRadioButton rdbtnUsarTemaClaro = new JRadioButton("Usar Tema Claro");
+		rdbtnUsarTemaClaro.setOpaque(false);
 		rdbtnUsarTemaClaro.setToolTipText("Marque esta opção para usar o tema claro (não recomendado).");
 		rdbtnUsarTemaClaro.setFocusable(false);
 		rdbtnUsarTemaClaro.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		rdbtnUsarTemaClaro.setBackground(new Color(0, 0, 0));
 		rdbtnUsarTemaClaro.setForeground(new Color(255, 255, 255));
-		rdbtnUsarTemaClaro.setBounds(314, 62, 132, 38);
+		rdbtnUsarTemaClaro.setBounds(320, 25, 128, 38);
 		painelGeral.add(rdbtnUsarTemaClaro);
 		rdbtnUsarTemaClaro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -202,6 +203,7 @@ public class Main extends JFrame {
 		
 		//Botões de números
 		JButton btnBotaoTecla0 = new JButton("0");
+		btnBotaoTecla0.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnBotaoTecla0.setFocusable(false);
 		btnBotaoTecla0.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 18));
 		btnBotaoTecla0.setForeground(Color.WHITE);
@@ -215,6 +217,7 @@ public class Main extends JFrame {
 		});
 		
 		JButton btnBotaoTecla01 = new JButton("1");
+		btnBotaoTecla01.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnBotaoTecla01.setFocusable(false);
 		btnBotaoTecla01.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 18));
 		btnBotaoTecla01.setForeground(new Color(255, 255, 255));
@@ -228,6 +231,7 @@ public class Main extends JFrame {
 		});
 		
 		JButton btnBotaoTecla02 = new JButton("2");
+		btnBotaoTecla02.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnBotaoTecla02.setFocusable(false);
 		btnBotaoTecla02.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 18));
 		btnBotaoTecla02.setForeground(new Color(255, 255, 255));
@@ -241,6 +245,7 @@ public class Main extends JFrame {
 		});
 		
 		JButton btnBotaoTecla03 = new JButton("3");
+		btnBotaoTecla03.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnBotaoTecla03.setFocusable(false);
 		btnBotaoTecla03.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 18));
 		btnBotaoTecla03.setForeground(new Color(255, 255, 255));
@@ -254,6 +259,7 @@ public class Main extends JFrame {
 		});
 		
 		JButton btnBotaoTecla04 = new JButton("4");
+		btnBotaoTecla04.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnBotaoTecla04.setFocusable(false);
 		btnBotaoTecla04.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 18));
 		btnBotaoTecla04.setForeground(new Color(255, 255, 255));
@@ -267,6 +273,7 @@ public class Main extends JFrame {
 		});
 		
 		JButton btnBotaoTecla05 = new JButton("5");
+		btnBotaoTecla05.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnBotaoTecla05.setFocusable(false);
 		btnBotaoTecla05.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 18));
 		btnBotaoTecla05.setForeground(new Color(255, 255, 255));
@@ -280,6 +287,7 @@ public class Main extends JFrame {
 		});
 		
 		JButton btnBotaoTecla06 = new JButton("6");
+		btnBotaoTecla06.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnBotaoTecla06.setFocusable(false);
 		btnBotaoTecla06.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 18));
 		btnBotaoTecla06.setForeground(new Color(255, 255, 255));
@@ -293,6 +301,7 @@ public class Main extends JFrame {
 		});
 		
 		JButton btnBotaoTecla07 = new JButton("7");
+		btnBotaoTecla07.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnBotaoTecla07.setFocusable(false);
 		btnBotaoTecla07.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 18));
 		btnBotaoTecla07.setForeground(new Color(255, 255, 255));
@@ -306,6 +315,7 @@ public class Main extends JFrame {
 		});
 		
 		JButton btnBotaoTecla08 = new JButton("8");
+		btnBotaoTecla08.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnBotaoTecla08.setFocusable(false);
 		btnBotaoTecla08.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 18));
 		btnBotaoTecla08.setForeground(new Color(255, 255, 255));
@@ -319,6 +329,7 @@ public class Main extends JFrame {
 		});
 		
 		JButton btnBotaoTecla09 = new JButton("9");
+		btnBotaoTecla09.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnBotaoTecla09.setFocusable(false);
 		btnBotaoTecla09.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 18));
 		btnBotaoTecla09.setForeground(new Color(255, 255, 255));
@@ -332,6 +343,7 @@ public class Main extends JFrame {
 		});
 		
 		JButton btnBotaoTeclaPonto = new JButton(",");
+		btnBotaoTeclaPonto.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnBotaoTeclaPonto.setFocusable(false);
 		btnBotaoTeclaPonto.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 18));
 		btnBotaoTeclaPonto.setForeground(Color.WHITE);
@@ -346,6 +358,7 @@ public class Main extends JFrame {
 		
 		//Botões de operações
 		JButton btnBotaoTeclaLimpa = new JButton("C");
+		btnBotaoTeclaLimpa.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnBotaoTeclaLimpa.setToolTipText("Limpa todos os campos da calculadora.");
 		btnBotaoTeclaLimpa.setFocusable(false);
 		btnBotaoTeclaLimpa.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 18));
@@ -360,6 +373,7 @@ public class Main extends JFrame {
 		});
 		
 		JButton btnBotaoTeclaMais = new JButton("+");
+		btnBotaoTeclaMais.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnBotaoTeclaMais.setFocusable(false);
 		btnBotaoTeclaMais.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 18));
 		btnBotaoTeclaMais.setForeground(new Color(255, 255, 255));
@@ -374,6 +388,7 @@ public class Main extends JFrame {
 		});
 		
 		JButton btnBotaoTeclaVezes = new JButton("*");
+		btnBotaoTeclaVezes.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnBotaoTeclaVezes.setFocusable(false);
 		btnBotaoTeclaVezes.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 18));
 		btnBotaoTeclaVezes.setForeground(new Color(255, 255, 255));
@@ -388,6 +403,7 @@ public class Main extends JFrame {
 		});
 		
 		JButton btnBotaoTeclaDivisao = new JButton("/");
+		btnBotaoTeclaDivisao.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnBotaoTeclaDivisao.setFocusable(false);
 		btnBotaoTeclaDivisao.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 18));
 		btnBotaoTeclaDivisao.setForeground(Color.WHITE);
@@ -402,6 +418,7 @@ public class Main extends JFrame {
 		});
 		
 		JButton btnBotaoTeclaMenos = new JButton("-");
+		btnBotaoTeclaMenos.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnBotaoTeclaMenos.setFocusable(false);
 		btnBotaoTeclaMenos.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 18));
 		btnBotaoTeclaMenos.setForeground(Color.WHITE);
@@ -416,6 +433,7 @@ public class Main extends JFrame {
 		});
 		
 		JButton btnBotaoTeclaCalcular = new JButton("Calcular");
+		btnBotaoTeclaCalcular.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnBotaoTeclaCalcular.setFocusable(false);
 		btnBotaoTeclaCalcular.setToolTipText("Realiza o calculo dos números dos campos acima.");
 		btnBotaoTeclaCalcular.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 18));
@@ -430,6 +448,7 @@ public class Main extends JFrame {
 		});
 		
 		JButton btnBotaoTeclaDel = new JButton("Delete");
+		btnBotaoTeclaDel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		btnBotaoTeclaDel.setToolTipText("Limpa todos os campos da calculadora.");
 		btnBotaoTeclaDel.setFocusable(false);
 		btnBotaoTeclaDel.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 18));
@@ -444,51 +463,60 @@ public class Main extends JFrame {
 		});
 		
 		tfCalculoNumeroInsercao = new JTextField();
-		tfCalculoNumeroInsercao.setFocusable(false);
-		tfCalculoNumeroInsercao.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 25));
+		tfCalculoNumeroInsercao.setOpaque(false);
 		tfCalculoNumeroInsercao.setHorizontalAlignment(SwingConstants.CENTER);
+		tfCalculoNumeroInsercao.setBorder(null);
+		tfCalculoNumeroInsercao.setFocusable(false);
+		tfCalculoNumeroInsercao.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 30));
 		tfCalculoNumeroInsercao.setEditable(false);
 		tfCalculoNumeroInsercao.setForeground(Color.WHITE);
 		tfCalculoNumeroInsercao.setColumns(10);
 		tfCalculoNumeroInsercao.setCaretColor(new Color(50, 50, 50));
 		tfCalculoNumeroInsercao.setBackground(new Color(50, 50, 50));
-		tfCalculoNumeroInsercao.setBounds(34, 101, 413, 88);
+		tfCalculoNumeroInsercao.setBounds(35, 115, 411, 62);
 		painelGeral.add(tfCalculoNumeroInsercao);
 		
 		tfCalculoNumeroOperacao = new JTextField();
+		tfCalculoNumeroOperacao.setOpaque(false);
+		tfCalculoNumeroOperacao.setBorder(null);
+		tfCalculoNumeroOperacao.setSelectedTextColor(new Color(0, 0, 0));
 		tfCalculoNumeroOperacao.setFocusable(false);
-		tfCalculoNumeroOperacao.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 25));
+		tfCalculoNumeroOperacao.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 30));
 		tfCalculoNumeroOperacao.setHorizontalAlignment(SwingConstants.TRAILING);
 		tfCalculoNumeroOperacao.setEditable(false);
 		tfCalculoNumeroOperacao.setForeground(Color.WHITE);
 		tfCalculoNumeroOperacao.setColumns(10);
 		tfCalculoNumeroOperacao.setCaretColor(new Color(50, 50, 50));
 		tfCalculoNumeroOperacao.setBackground(new Color(50, 50, 50));
-		tfCalculoNumeroOperacao.setBounds(34, 59, 236, 42);
+		tfCalculoNumeroOperacao.setBounds(35, 57, 300, 77);
 		painelGeral.add(tfCalculoNumeroOperacao);
 		
 		tfCalculoExibeOperador = new JTextField();
+		tfCalculoExibeOperador.setOpaque(false);
+		tfCalculoExibeOperador.setBorder(null);
 		tfCalculoExibeOperador.setFocusable(false);
-		tfCalculoExibeOperador.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 30));
+		tfCalculoExibeOperador.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 50));
 		tfCalculoExibeOperador.setHorizontalAlignment(SwingConstants.CENTER);
 		tfCalculoExibeOperador.setEditable(false);
 		tfCalculoExibeOperador.setForeground(Color.WHITE);
 		tfCalculoExibeOperador.setColumns(10);
 		tfCalculoExibeOperador.setCaretColor(new Color(50, 50, 50));
 		tfCalculoExibeOperador.setBackground(new Color(50, 50, 50));
-		tfCalculoExibeOperador.setBounds(269, 59, 45, 42);
+		tfCalculoExibeOperador.setBounds(334, 58, 112, 70);
 		painelGeral.add(tfCalculoExibeOperador);
 		
 		tfCalculoNumeroResultado = new JTextField();
+		tfCalculoNumeroResultado.setOpaque(false);
+		tfCalculoNumeroResultado.setBorder(null);
 		tfCalculoNumeroResultado.setFocusable(false);
-		tfCalculoNumeroResultado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 25));
+		tfCalculoNumeroResultado.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 30));
 		tfCalculoNumeroResultado.setHorizontalAlignment(SwingConstants.CENTER);
 		tfCalculoNumeroResultado.setEditable(false);
 		tfCalculoNumeroResultado.setForeground(Color.WHITE);
 		tfCalculoNumeroResultado.setColumns(10);
 		tfCalculoNumeroResultado.setCaretColor(new Color(50, 50, 50));
 		tfCalculoNumeroResultado.setBackground(new Color(50, 50, 50));
-		tfCalculoNumeroResultado.setBounds(34, 189, 413, 42);
+		tfCalculoNumeroResultado.setBounds(35, 175, 411, 56);
 		painelGeral.add(tfCalculoNumeroResultado);
 		
 		tfDicas = new JTextField();
@@ -507,6 +535,14 @@ public class Main extends JFrame {
 		painelGeral.add(tfDicas);
 		tfDicas.setColumns(10);
 		
+		JTextPane tpFundo = new JTextPane();
+		tpFundo.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		tpFundo.setBackground(new Color(40, 40, 40));
+		tpFundo.setCaretColor(new Color(192, 192, 192));
+		tpFundo.setEditable(false);
+		tpFundo.setBounds(34, 57, 413, 175);
+		painelGeral.add(tpFundo);
+		
 		//Frame usado para rastrear as teclas digitadas pelo usuário
 		tfRastreadorTeclas.setEditable(false);
 		tfRastreadorTeclas.setBackground(new Color(0, 0, 0));
@@ -518,6 +554,7 @@ public class Main extends JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
             	if(evt.getKeyCode() == 106 || evt.getKeyCode() == 107 || evt.getKeyCode() == 109 || evt.getKeyCode() == 111) {
             		if(cFunc.estaCalculando() == false) {
+            			if(tfCalculoNumeroResultado.getText().equals("Cálculo inválido")) {tfCalculoNumeroResultado.setText("0");}
                 		cFunc.setTipoCalculo(evt.getKeyCode());
                 		definirTipoCalculo(cFunc.buscarCodigoTecla(evt.getKeyCode()));
                 		cFunc.setEstaCalculando(true);
@@ -531,7 +568,13 @@ public class Main extends JFrame {
             	} else if(evt.getKeyCode() == 10) {
             		realizarCalculo(cFunc.getTipoCalculo());
             	} else {
-            		escreverTecla("#Key_numero", cFunc.buscarCodigoTecla(evt.getKeyCode()));
+            		String key = cFunc.buscarCodigoTecla(evt.getKeyCode());
+            		if(key != null) {
+                		escreverTecla("#Key_numero", key);
+                		tfDicas.setText(null);
+            		} else {
+            			tfDicas.setText("A tecla pressionada é inválida.");
+            		}
             	}
             }
         });
